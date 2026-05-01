@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sherlock izle (2010) - HDFilmCehennemi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #1e1e1e;
+            --bg-hover: #2a2a2a;
+            --bg-input: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --accent: #e50914;
+            --accent-hover: #b20710;
+            --border: #2a2a2a;
+            --star: #f5c518;
+            --badge-bg: #2a2a2a;
+            --badge-text: #e0e0e0;
+            --shadow: rgba(0,0,0,0.3);
+        }
+        
+        [data-theme="light"] {
+            --bg-primary: #f5f5f5;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-hover: #f0f0f0;
+            --bg-input: #f0f0f0;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-muted: #999999;
+            --border: #e0e0e0;
+            --badge-bg: #f0f0f0;
+            --badge-text: #333333;
+            --shadow: rgba(0,0,0,0.08);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            padding-bottom: 80px;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--bg-primary);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #e50914, #b20710);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .header-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 4px;
+            transition: transform 0.2s;
+        }
+        
+        .header-btn:active {
+            transform: scale(0.9);
+        }
+        
+        .login-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+        }
+        
+        .breadcrumb {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            flex-wrap: wrap;
+        }
+        
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb i {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+        
+        .film-header {
+            padding: 0 16px 16px;
+        }
+        
+        .film-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        
+        .film-title {
+            font-size: 22px;
+            font-weight: 700;
+        }
+        
+        .film-year {
+            font-size: 16px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        
+        .google-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: #4285F4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        
+        .age-warning {
+            margin: 0 16px 16px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .age-warning i {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+        
+        .age-warning p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        .film-desc {
+            padding: 0 16px 16px;
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        
+        .film-meta-row {
+            padding: 0 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .imdb-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .imdb-logo {
+            background: var(--star);
+            color: #000;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 900;
+        }
+        
+        .imdb-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .imdb-label {
+            font-size: 11px;
+            color: var(--star);
+            font-weight: 600;
+        }
+        
+        .imdb-score {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--star);
+        }
+        
+        .imdb-votes {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        
+        .fragman-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 10px 20px;
+            color: var(--text-primary);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .fragman-btn:active {
+            background: var(--bg-hover);
+        }
+        
+        .fragman-btn i {
+            width: 36px;
+            height: 36px;
+            background: var(--bg-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 14px;
+        }
+        
+        .details-grid {
+            padding: 0 16px 20px;
+        }
+        
+        .detail-row {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .detail-label {
+            width: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .detail-value {
+            flex: 1;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .detail-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .detail-tag {
+            background: var(--bg-hover);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: var(--text-primary);
+        }
+        
+        .seasons-section {
+            padding: 0 16px 20px;
+        }
+        
+        .seasons-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        
+        .seasons-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .seasons-filter {
+            color: var(--accent);
+            font-size: 18px;
+        }
+        
+        .season-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .season-tabs::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .season-tab {
+            flex-shrink: 0;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+        
+        .season-tab.active {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+        
+        .episodes-list {
+            display: none;
+        }
+        
+        .episodes-list.active {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .episode-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            text-decoration: none;
+            color: var(--text-primary);
+            display: block;
+        }
+        
+        .episode-card:active {
+            background: var(--bg-hover);
+            transform: scale(0.98);
+        }
+        
+        .episode-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .episode-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .episode-date {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .episode-date i {
+            font-size: 12px;
+        }
+        
+        .episode-badges {
+            display: flex;
+            gap: 6px;
+        }
+        
+        .ep-badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .ep-badge-cc {
+            background: var(--bg-hover);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+        
+        .comments-section {
+            padding: 20px 16px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .comments-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        
+        .comments-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .comments-icon {
+            color: var(--accent);
+            font-size: 20px;
+        }
+        
+        .login-warning {
+            background: rgba(229, 9, 20, 0.1);
+            border: 1px solid rgba(229, 9, 20, 0.2);
+            border-radius: 12px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        
+        .login-warning i {
+            color: var(--accent);
+            font-size: 18px;
+            margin-top: 2px;
+        }
+        
+        .login-warning p {
+            font-size: 13px;
+            color: #ff6b6b;
+            line-height: 1.5;
+        }
+        
+        .comment-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+        }
+        
+        .comment-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .comment-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .comment-user {
+            flex: 1;
+        }
+        
+        .comment-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .comment-time {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        
+        .comment-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 10px;
+            padding-left: 46px;
+        }
+        
+        .comment-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-left: 46px;
+        }
+        
+        .comment-action {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+        
+        .comment-action i {
+            font-size: 14px;
+        }
+        
+        .video-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .video-popup.active {
+            display: flex;
+        }
+        
+        .video-popup iframe {
+            width: 90%;
+            max-width: 900px;
+            aspect-ratio: 16/9;
+            border: none;
+            border-radius: 8px;
+        }
+        
+        .close-popup {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            font-size: 28px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        [data-theme="light"] .search-overlay {
+            background: rgba(255,255,255,0.9);
+        }
+        
+        .search-overlay.active {
+            display: flex;
+        }
+        
+        .search-panel {
+            background: var(--bg-secondary);
+            margin: 80px 16px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px var(--shadow);
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .search-header {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .search-input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 16px 12px 44px;
+            color: var(--text-primary);
+            font-size: 15px;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+        
+        .esc-btn {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .popular-searches {
+            padding: 20px 16px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        
+        .popular-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        
+        .popular-title i {
+            color: var(--accent);
+        }
+        
+        .search-movie-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .search-movie-item:last-child {
+            border-bottom: none;
+        }
+        
+        .search-movie-thumb {
+            width: 48px;
+            height: 64px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: var(--bg-hover);
+        }
+        
+        .search-movie-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .search-movie-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .search-movie-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        
+        .search-movie-year {
+            font-size: 12px;
+            color: var(--text-secondary);
+            background: var(--badge-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .search-movie-rating {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 12px;
+            color: var(--star);
+            font-weight: 700;
+            background: var(--badge-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        
+        .search-movie-type {
+            font-size: 12px;
+            color: var(--text-secondary);
+            background: var(--badge-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .search-movie-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 0 12px;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            transition: background 0.3s;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 10px;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        
+        .nav-item.active {
+            color: var(--text-primary);
+            background: var(--bg-hover);
+        }
+        
+        .nav-item i {
+            font-size: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .episodes-list.active {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-play" style="color: white;"></i>
+            </div>
+            <span>dizora</span>
+        </a>
+        <div class="header-actions">
+            <button class="header-btn" onclick="toggleSearch()">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="header-btn" onclick="toggleTheme()" id="themeBtn">
+                <i class="fas fa-sun"></i>
+            </button>
+            <button class="login-btn">
+                <i class="fas fa-sign-in-alt"></i>
+                Giriş
+            </button>
+        </div>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="index.html"><i class="fas fa-home"></i> hdfilmcehennemi</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Yabancı Dizi İzle</span>
+        <i class="fas fa-chevron-right"></i>
+        <span>Sherlock izle</span>
+    </div>
+
+    <div class="film-header">
+        <div class="film-title-row">
+            <h1 class="film-title">Sherlock izle <span class="film-year">(2010)</span></h1>
+            <button class="google-btn">G</button>
+        </div>
+    </div>
+
+    <div class="age-warning">
+        <i class="fas fa-film"></i>
+        <p>13 yaş ve üzeri için uygun. (Küfür veya şiddet içerebilir.)</p>
+    </div>
+
+    <div class="film-desc">
+        Sherlock!Geçtiğimiz sene sinemada büyük beğeni bulan Sherlock Holmes mini dizi olarak BBC One'da yeniden hayat buluyor. Sherlock Holmes'ü Benedict Cumberbatch ve sadık yardımcı olan Dr. Watson'ı ise Martin Freeman canlandırıcak.
+    </div>
+
+    <div class="film-meta-row">
+        <div class="imdb-box">
+            <div class="imdb-logo">IMDb</div>
+            <div class="imdb-info">
+                <span class="imdb-label">IMDb Puanı</span>
+                <div>
+                    <span class="imdb-score">9.0</span>
+                    <span class="imdb-votes">(1086894 oy)</span>
+                </div>
+            </div>
+        </div>
+        <button class="fragman-btn" onclick="openFragman()">
+            <i class="fas fa-play"></i>
+            Fragman
+        </button>
+    </div>
+
+    <div class="details-grid">
+        <div class="detail-row">
+            <span class="detail-label">Süre</span>
+            <span class="detail-value">90 dakika</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">İzlenme</span>
+            <span class="detail-value">292,243 izlenme</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Yıl - Ülke</span>
+            <div class="detail-value detail-tags">
+                <span class="detail-tag">2010</span>
+                <span class="detail-tag">İngiltere</span>
+            </div>
+        </div>
+        <div class="detail-row" style="border-bottom: none;">
+            <span class="detail-label">Türler</span>
+            <div class="detail-value detail-tags">
+                <span class="detail-tag">Suç</span>
+                <span class="detail-tag">Dram</span>
+                <span class="detail-tag">Gizem</span>
+                <span class="detail-tag">Gerilim</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="seasons-section">
+        <div class="seasons-header">
+            <h2 class="seasons-title">Sherlock Dizisinin Tüm Bölümleri</h2>
+            <i class="fas fa-sliders-h seasons-filter"></i>
+        </div>
+        
+        <div class="season-tabs">
+            <button class="season-tab active" onclick="switchSeason(1, this)">Sezon 1</button>
+            <button class="season-tab" onclick="switchSeason(2, this)">Sezon 2</button>
+            <button class="season-tab" onclick="switchSeason(3, this)">Sezon 3</button>
+            <button class="season-tab" onclick="switchSeason(4, this)">Sezon 4</button>
+        </div>
+
+        <div class="episodes-list active" id="season1">
+            <a href="sherlock-s1e1.html" class="episode-card">
+                <div class="episode-title">1. Sezon 1. Bölüm</div>
+                <div class="episode-meta">
+                    <span class="episode-date"><i class="far fa-calendar"></i> 25 Temmuz 2010</span>
+                    <div class="episode-badges">
+                        <span class="ep-badge ep-badge-cc">CC</span>
+                    </div>
+                </div>
+            </a>
+            <a href="sherlock-s1e2.html" class="episode-card">
+                <div class="episode-title">1. Sezon 2. Bölüm</div>
+                <div class="episode-meta">
+                    <span class="episode-date"><i class="far fa-calendar"></i> 01 Ağustos 2010</span>
+                    <div class="episode-badges">
+                        <span class="ep-badge ep-badge-cc">CC</span>
+                    </div>
+                </div>
+            </a>
+            <a href="sherlock-s1e3.html" class="episode-card">
+                <div class="episode-title">1. Sezon 3. Bölüm</div>
+                <div class="episode-meta">
+                    <span class="episode-date"><i class="far fa-calendar"></i> 08 Ağustos 2010</span>
+                    <div class="episode-badges">
+                        <span class="ep-badge ep-badge-cc">CC</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="episodes-list" id="season2">
+            <a href="sherlock-s2e1.html" class="episode-card">
+                <div class="episode-title">2. Sezon 1. Bölüm</div>
+                <div class="episode-meta">
+                    <span class="episode-date"><i class="far fa-calendar"></i> 01 Ocak 2012</span>
+                    <div class="episode-badges">
+                        <span class="ep-badge ep-badge-cc">CC</span>
+                    </div>
+                </div>
+            </a>
+            <a href="sherlock-s2e2.html" class="episode-card">
+                <div class="episode-title">2. Sezon 2. Bölüm</div>
+                <div class="episode-meta">
+                    <span class="episode-date"><i class="far fa-calendar"></i> 08 Ocak 2012</span>
+                    <div class="episode-badges">
+                        <span class="ep-badge ep-badge-cc">CC</span>
+                    </div>
+                </div>
+            </a>
+            <a href="sherlock-s2e3.html" class="episode-card">
+                <div class="episode-title">2. Sezon 3. Bölüm</div>
+                <div class="episode-meta">
+                    <span class="episode-date"><i class="far fa-calendar"></i> 15 Ocak 2012</span>
+                    <div class="episode-badges">
+                        <span class="ep-badge ep-badge-cc">CC</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="episodes-list" id="season3">
+            <a href="sherlock-s3e1.html" class="episode-card">
+                <div class="episode-title">3. Sezon 1. Bölüm</div>
+                <div class="episode-meta">
+                    <span class="episode-date"><i class="far fa-calendar"></i> 01 Ocak 2014</span>
+                    <div class="episode-badges">
+                        <span class="ep-badge ep-badge-cc">CC</span>
+                    </div>
+                </div>
+            </a>
+            <a href="sherlock-s3e2.html" class="episode-card">
+                <div class="episode-title">3. Sezon 2. Bölüm</div>
+                <div class="episode-meta">
+                    <span class="episode-date"><i class="far fa-calendar"></i> 05 Ocak 2014</span>
+                    <div class="episode-badges">
+                        <span class="ep-badge ep-badge-cc">CC</span>
+                    </div>
+                </div>
+            </a>
+            <a href="sherlock-s3e3.html" class="episode-card">
+                <div class="episode-title">3. Sezon 3. Bölüm</div>
+                <div class="episode-meta">
+                    <span class="episode-date"><i class="far fa-calendar"></i> 12 Ocak 2014</span>
+                    <div class="episode-badges">
+                        <span class="ep-badge ep-badge-cc">CC</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="episodes-list" id="season4">
+            <a href="sherlock-s4e1.html" class="episode-card">
+                <div class="episode-title">4. Sezon 1. Bölüm</div>
+                <div class="episode-meta">
+                    <span class="episode-date"><i class="far fa-calendar"></i> 01 Ocak 2017</span>
+                    <div class="episode-badges">
+                        <span class="ep-badge ep-badge-cc">CC</span>
+                    </div>
+                </div>
+            </a>
+            <a href="sherlock-s4e2.html" class="episode-card">
+                <div class="episode-title">4. Sezon 2. Bölüm</div>
+                <div class="episode-meta">
+                    <span class="episode-date"><i class="far fa-calendar"></i> 08 Ocak 2017</span>
+                    <div class="episode-badges">
+                        <span class="ep-badge ep-badge-cc">CC</span>
+                    </div>
+                </div>
+            </a>
+            <a href="sherlock-s4e3.html" class="episode-card">
+                <div class="episode-title">4. Sezon 3. Bölüm</div>
+                <div class="episode-meta">
+                    <span class="episode-date"><i class="far fa-calendar"></i> 15 Ocak 2017</span>
+                    <div class="episode-badges">
+                        <span class="ep-badge ep-badge-cc">CC</span>
+                    </div>
+                </div>
+            </a>
+            <a href="sherlock-s4e4.html" class="episode-card">
+                <div class="episode-title">4. Sezon 4. Bölüm</div>
+                <div class="episode-meta">
+                    <span class="episode-date"><i class="far fa-calendar"></i> 01 Ocak 2016</span>
+                    <div class="episode-badges">
+                        <span class="ep-badge ep-badge-cc">CC</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="comments-section">
+        <div class="comments-header">
+            <h3 class="comments-title">Yorumlar (98)</h3>
+            <i class="far fa-comments comments-icon"></i>
+        </div>
+        
+        <div class="login-warning">
+            <i class="fas fa-exclamation-circle"></i>
+            <p>Sadece kayıtlı üyeler yorum yapabilir. Bir kaç saniye içerisinde kayıt olabilirsiniz.</p>
+        </div>
+        
+        <div class="comment-card">
+            <div class="comment-header">
+                <div class="comment-avatar"><i class="fas fa-user"></i></div>
+                <div class="comment-user">
+                    <div class="comment-name">Apoyusiktim</div>
+                    <div class="comment-time">1 ay önce</div>
+                </div>
+            </div>
+            <div class="comment-text">Admin ingilizce altyazı ekler misin</div>
+            <div class="comment-actions">
+                <span class="comment-action"><i class="fas fa-fire"></i> 1</span>
+                <span class="comment-action"><i class="fas fa-reply"></i> Cevapla</span>
+            </div>
+        </div>
+        
+        <div class="comment-card">
+            <div class="comment-header">
+                <div class="comment-avatar"><i class="fas fa-user"></i></div>
+                <div class="comment-user">
+                    <div class="comment-name">zifirikaranlik</div>
+                    <div class="comment-time">2 ay önce</div>
+                </div>
+            </div>
+            <div class="comment-text">mükemmel bir dizi. her bölümü bir film tadında olan fakat yinede dizi olan bir dizi... MÜKEMMEL</div>
+            <div class="comment-actions">
+                <span class="comment-action"><i class="fas fa-fire"></i> 2</span>
+                <span class="comment-action"><i class="fas fa-reply"></i> Cevapla</span>
+            </div>
+        </div>
+        
+        <div class="comment-card" style="margin-left: 20px;">
+            <div class="comment-header">
+                <div class="comment-avatar"><i class="fas fa-user"></i></div>
+                <div class="comment-user">
+                    <div class="comment-name">yigitkardes89</div>
+                    <div class="comment-time">4 hafta önce</div>
+                </div>
+            </div>
+            <div class="comment-text">Mentalist izlw</div>
+            <div class="comment-actions">
+                <span class="comment-action"><i class="fas fa-fire"></i> 0</span>
+            </div>
+        </div>
+        
+        <div class="comment-card" style="margin-left: 40px;">
+            <div class="comment-header">
+                <div class="comment-avatar"><i class="fas fa-user"></i></div>
+                <div class="comment-user">
+                    <div class="comment-name">Jrbaysan8</div>
+                    <div class="comment-time">1 ay önce</div>
+                </div>
+            </div>
+            <div class="comment-text">Fazla mı mantıklı konuştun</div>
+            <div class="comment-actions">
+                <span class="comment-action"><i class="fas fa-fire"></i> 0</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="video-popup" id="videoPopup" onclick="closePopupOutside(event)">
+        <button class="close-popup" onclick="closePopup()">×</button>
+        <iframe id="popupVideo" src="" allowfullscreen></iframe>
+    </div>
+
+    <div class="search-overlay" id="searchOverlay" onclick="closeSearchOutside(event)">
+        <div class="search-panel" onclick="event.stopPropagation()">
+            <div class="search-header">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Film veya Dizi Ara" id="searchInput">
+                </div>
+                <button class="esc-btn" onclick="toggleSearch()">ESC</button>
+            </div>
+            <div class="popular-searches">
+                <div class="popular-title">
+                    <i class="fas fa-bolt"></i>
+                    Popüler Aramalar
+                </div>
+                <div class="search-movie-item">
+                    <div class="search-movie-thumb">
+                        <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=200&q=80" alt="Sherlock">
+                    </div>
+                    <div class="search-movie-info">
+                        <div class="search-movie-meta">
+                            <span class="search-movie-year">2010</span>
+                            <span class="search-movie-rating"><i class="fas fa-star"></i> 9.0</span>
+                            <span class="search-movie-type">Dizi</span>
+                        </div>
+                        <div class="search-movie-title">Sherlock</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Anasayfa</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-film"></i>
+            <span>Filmler</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-compass"></i>
+            <span>Keşfet</span>
+        </a>
+        <a href="#" class="nav-item active">
+            <i class="fas fa-tv"></i>
+            <span>Diziler</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-bars"></i>
+            <span>Menü</span>
+        </a>
+    </nav>
+
+    <script>
+        let isDark = true;
+        function toggleTheme() {
+            isDark = !isDark;
+            const body = document.body;
+            const themeBtn = document.getElementById('themeBtn');
+            
+            if (isDark) {
+                body.removeAttribute('data-theme');
+                themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                body.setAttribute('data-theme', 'light');
+                themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        }
+        
+        function toggleSearch() {
+            const overlay = document.getElementById('searchOverlay');
+            overlay.classList.toggle('active');
+            if (overlay.classList.contains('active')) {
+                setTimeout(() => document.getElementById('searchInput').focus(), 300);
+            }
+        }
+        
+        function closeSearchOutside(event) {
+            if (event.target === document.getElementById('searchOverlay')) {
+                toggleSearch();
+            }
+        }
+        
+        function switchSeason(seasonNum, btn) {
+            document.querySelectorAll('.season-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.episodes-list').forEach(list => {
+                list.classList.remove('active');
+            });
+            
+            btn.classList.add('active');
+            document.getElementById('season' + seasonNum).classList.add('active');
+        }
+        
+        function openFragman() {
+            const popup = document.getElementById('videoPopup');
+            const iframe = document.getElementById('popupVideo');
+            
+            iframe.src = 'https://www.youtube.com/embed/xK7S9mrFWL4?autoplay=1&rel=0';
+            popup.classList.add('active');
+        }
+        
+        function closePopup() {
+            const popup = document.getElementById('videoPopup');
+            const iframe = document.getElementById('popupVideo');
+            popup.classList.remove('active');
+            iframe.src = '';
+        }
+        
+        function closePopupOutside(event) {
+            if (event.target === document.getElementById('videoPopup')) {
+                closePopup();
+            }
+        }
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const searchOverlay = document.getElementById('searchOverlay');
+                const videoPopup = document.getElementById('videoPopup');
+                
+                if (searchOverlay.classList.contains('active')) {
+                    toggleSearch();
+                }
+                if (videoPopup.classList.contains('active')) {
+                    closePopup();
+                }
+            }
+        });
+        
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') {
+                    e.preventDefault();
+                }
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

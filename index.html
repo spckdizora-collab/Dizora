@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HDFilmCehennemi - Film İzle | HD Film İzle</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #1e1e1e;
+            --bg-hover: #2a2a2a;
+            --bg-input: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --accent: #e50914;
+            --accent-hover: #b20710;
+            --border: #2a2a2a;
+            --star: #f5c518;
+            --badge-bg: #2a2a2a;
+            --badge-text: #e0e0e0;
+            --shadow: rgba(0,0,0,0.3);
+        }
+        
+        [data-theme="light"] {
+            --bg-primary: #f5f5f5;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-hover: #f0f0f0;
+            --bg-input: #f0f0f0;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-muted: #999999;
+            --border: #e0e0e0;
+            --badge-bg: #f0f0f0;
+            --badge-text: #333333;
+            --shadow: rgba(0,0,0,0.08);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            padding-bottom: 80px;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        /* Header */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--bg-primary);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #e50914, #b20710);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .header-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 4px;
+            transition: transform 0.2s;
+        }
+        
+        .header-btn:active {
+            transform: scale(0.9);
+        }
+        
+        .login-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+        }
+        
+        /* Hero Slider */
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+        }
+        
+        .slider-container {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+        
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .slide-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 70%;
+            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        
+        .slide-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #ccc;
+        }
+        
+        .slide-year {
+            font-weight: 600;
+        }
+        
+        .slide-comments {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .slide-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--star);
+            font-weight: 700;
+        }
+        
+        .slide-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            color: white;
+        }
+        
+        .slide-tags {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255,255,255,0.15);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            backdrop-filter: blur(4px);
+        }
+        
+        .tag-dub {
+            background: var(--accent);
+        }
+        
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            backdrop-filter: blur(4px);
+        }
+        
+        .slider-prev { left: 12px; }
+        .slider-next { right: 12px; }
+        
+        .slider-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+        }
+        
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .dot.active {
+            background: var(--accent);
+            width: 18px;
+            border-radius: 3px;
+        }
+        
+        /* Reklam Alanları */
+        .ad-section {
+            padding: 12px 16px;
+            background: var(--bg-primary);
+        }
+        
+        .ad-banner {
+            width: 100%;
+            height: 80px;
+            background: var(--bg-secondary);
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ad-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(128,128,128,0.05), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .ad-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+        
+        .ad-size {
+            font-size: 11px;
+            opacity: 0.7;
+        }
+        
+        /* Kategori Sekmeleri */
+        .tabs-section {
+            padding: 16px 0;
+            background: var(--bg-primary);
+            position: sticky;
+            top: 57px;
+            z-index: 100;
+        }
+        
+        .tabs-container {
+            display: flex;
+            gap: 8px;
+            padding: 0 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .tabs-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .tab {
+            flex-shrink: 0;
+            padding: 10px 18px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            white-space: nowrap;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+        
+        .tab.active {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+        
+        /* Film Grid */
+        .movies-section {
+            padding: 0 16px 20px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+        
+        .see-all {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .movie-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            box-shadow: 0 2px 12px var(--shadow);
+        }
+        
+        .movie-card:active {
+            transform: scale(0.98);
+        }
+        
+        .movie-poster {
+            width: 100%;
+            aspect-ratio: 2/3;
+            background: var(--bg-secondary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .movie-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .movie-card:hover .movie-poster img {
+            transform: scale(1.05);
+        }
+        
+        .movie-quality {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(0,0,0,0.8);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            color: white;
+            backdrop-filter: blur(4px);
+        }
+        
+        .movie-info {
+            padding: 10px 12px 12px;
+        }
+        
+        .movie-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+        
+        .movie-year {
+            font-weight: 600;
+        }
+        
+        .movie-rating {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            color: var(--star);
+            font-weight: 700;
+        }
+        
+        .movie-title {
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            color: var(--text-primary);
+        }
+        
+        .movie-tags {
+            display: flex;
+            gap: 6px;
+        }
+        
+        .movie-tag {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            background: var(--badge-bg);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--badge-text);
+        }
+        
+        .movie-tag i {
+            font-size: 9px;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 0 12px;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            transition: background 0.3s;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 10px;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        
+        .nav-item.active {
+            color: var(--text-primary);
+            background: var(--bg-hover);
+        }
+        
+        .nav-item i {
+            font-size: 20px;
+        }
+        
+        /* Arama Overlay */
+        .search-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        [data-theme="light"] .search-overlay {
+            background: rgba(255,255,255,0.9);
+        }
+        
+        .search-overlay.active {
+            display: flex;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .search-panel {
+            background: var(--bg-secondary);
+            margin: 80px 16px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px var(--shadow);
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .search-header {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .search-input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 16px 12px 44px;
+            color: var(--text-primary);
+            font-size: 15px;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+        
+        .esc-btn {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .popular-searches {
+            padding: 20px 16px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        
+        .popular-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        
+        .popular-title i {
+            color: var(--accent);
+        }
+        
+        .search-movie-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .search-movie-item:last-child {
+            border-bottom: none;
+        }
+        
+        .search-movie-thumb {
+            width: 48px;
+            height: 64px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: var(--bg-hover);
+        }
+        
+        .search-movie-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .search-movie-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .search-movie-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        
+        .search-movie-year {
+            font-size: 12px;
+            color: var(--text-secondary);
+            background: var(--badge-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .search-movie-rating {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 12px;
+            color: var(--star);
+            font-weight: 700;
+            background: var(--badge-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        
+        .search-movie-type {
+            font-size: 12px;
+            color: var(--text-secondary);
+            background: var(--badge-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .search-movie-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        /* Responsive */
+        @media (min-width: 768px) {
+            .movies-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .hero-slider {
+                height: 350px;
+            }
+            .search-panel {
+                margin: 80px auto 0;
+                max-width: 600px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .movies-grid {
+                grid-template-columns: repeat(4, 1fr);
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            .hero-slider {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="#" class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-play" style="color: white;"></i>
+            </div>
+            <span>Dizora</span>
+        </a>
+        <div class="header-actions">
+            <button class="header-btn" onclick="toggleSearch()">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="header-btn" onclick="toggleTheme()" id="themeBtn">
+                <i class="fas fa-sun"></i>
+            </button>
+            <button class="login-btn">
+                <i class="fas fa-sign-in-alt"></i>
+                Giriş
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Slider -->
+    <div class="hero-slider">
+        <div class="slider-container" id="sliderContainer">
+            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&q=80');">
+                <div class="slide-overlay">
+                    <div class="slide-meta">
+                        <span class="slide-year">2025</span>
+                        <span class="slide-comments"><i class="fas fa-comment"></i> 454</span>
+                        <span class="slide-rating"><i class="fas fa-star"></i> 7.3</span>
+                    </div>
+                    <h2 class="slide-title">Avatar Ateş ve Kül</h2>
+                    <div class="slide-tags">
+                        <span class="tag tag-dub"><i class="fas fa-flag"></i> TR</span>
+                        <span class="tag"><i class="fas fa-closed-captioning"></i> Dublaj & Altyazılı</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=800&q=80');">
+                <div class="slide-overlay">
+                    <div class="slide-meta">
+                        <span class="slide-year">2026</span>
+                        <span class="slide-comments"><i class="fas fa-comment"></i> 326</span>
+                        <span class="slide-rating"><i class="fas fa-star"></i> 6.8</span>
+                    </div>
+                    <h2 class="slide-title">Yardım Çağrısı - Send Help</h2>
+                    <div class="slide-tags">
+                        <span class="tag"><i class="fas fa-closed-captioning"></i> Türkçe Altyazılı</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=800&q=80');">
+                <div class="slide-overlay">
+                    <div class="slide-meta">
+                        <span class="slide-year">2025</span>
+                        <span class="slide-comments"><i class="fas fa-comment"></i> 189</span>
+                        <span class="slide-rating"><i class="fas fa-star"></i> 8.1</span>
+                    </div>
+                    <h2 class="slide-title">Sarah's Oil</h2>
+                    <div class="slide-tags">
+                        <span class="tag"><i class="fas fa-closed-captioning"></i> Türkçe Altyazılı</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="slider-nav slider-prev" onclick="prevSlide()">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="slider-nav slider-next" onclick="nextSlide()">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="slider-dots">
+            <span class="dot active" onclick="goToSlide(0)"></span>
+            <span class="dot" onclick="goToSlide(1)"></span>
+            <span class="dot" onclick="goToSlide(2)"></span>
+        </div>
+    </div>
+
+    <!-- Reklam Alanları -->
+    <div class="ad-section">
+        <div class="ad-banner" style="height: 90px;">
+            <span class="ad-label">🔴 REKLAM ALANI - HEADER BANNER</span>
+            <span class="ad-size">970x90 / 728x90 / 320x100</span>
+        </div>
+        <div class="ad-banner" style="height: 60px;">
+            <span class="ad-label">🔴 REKLAM ALANI - SPONSOR</span>
+            <span class="ad-size">728x90 / 468x60 / 320x50</span>
+        </div>
+    </div>
+
+    <!-- Kategori Sekmeleri -->
+    <div class="tabs-section">
+        <div class="tabs-container">
+            <button class="tab active" onclick="switchTab(this, 'new')">Yeni Eklenenler</button>
+            <button class="tab" onclick="switchTab(this, 'recommended')">Tavsiye Filmler</button>
+            <button class="tab" onclick="switchTab(this, 'imdb')">IMDb 7+ Filmler</button>
+            <button class="tab" onclick="switchTab(this, 'commented')">En Çok Yorumlananlar</button>
+            <button class="tab" onclick="switchTab(this, 'liked')">En Çok Beğenilenler</button>
+        </div>
+    </div>
+
+    <!-- Film Grid (10 Film) -->
+    <div class="movies-section">
+        <div class="movies-grid" id="moviesGrid">
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&q=80" alt="Film 1">
+                    <span class="movie-quality">HD</span>
+                </div>
+                <div class="movie-info">
+                    <div class="movie-meta">
+                        <span class="movie-year">2025</span>
+                        <span class="movie-rating"><i class="fas fa-star"></i> 8.1</span>
+                    </div>
+                    <h3 class="movie-title">Film 1</h3>
+                    <div class="movie-tags">
+                        <span class="movie-tag"><i class="fas fa-closed-captioning"></i> Altyazılı</span>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&q=80" alt="Film 2">
+                    <span class="movie-quality">HD</span>
+                </div>
+                <div class="movie-info">
+                    <div class="movie-meta">
+                        <span class="movie-year">2026</span>
+                        <span class="movie-rating"><i class="fas fa-star"></i> 7.5</span>
+                    </div>
+                    <h3 class="movie-title">Film 2</h3>
+                    <div class="movie-tags">
+                        <span class="movie-tag"><i class="fas fa-closed-captioning"></i> Altyazılı</span>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400&q=80" alt="Film 3">
+                    <span class="movie-quality">HD</span>
+                </div>
+                <div class="movie-info">
+                    <div class="movie-meta">
+                        <span class="movie-year">2025</span>
+                        <span class="movie-rating"><i class="fas fa-star"></i> 9.0</span>
+                    </div>
+                    <h3 class="movie-title">Film 3</h3>
+                    <div class="movie-tags">
+                        <span class="movie-tag"><i class="fas fa-flag"></i> TR</span>
+                        <span class="movie-tag"><i class="fas fa-closed-captioning"></i> Dublaj</span>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=400&q=80" alt="Film 4">
+                    <span class="movie-quality">HD</span>
+                </div>
+                <div class="movie-info">
+                    <div class="movie-meta">
+                        <span class="movie-year">2026</span>
+                        <span class="movie-rating"><i class="fas fa-star"></i> 6.8</span>
+                    </div>
+                    <h3 class="movie-title">Film 4</h3>
+                    <div class="movie-tags">
+                        <span class="movie-tag"><i class="fas fa-closed-captioning"></i> Altyazılı</span>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&q=80" alt="Film 5">
+                    <span class="movie-quality">HD</span>
+                </div>
+                <div class="movie-info">
+                    <div class="movie-meta">
+                        <span class="movie-year">2025</span>
+                        <span class="movie-rating"><i class="fas fa-star"></i> 7.9</span>
+                    </div>
+                    <h3 class="movie-title">Film 5</h3>
+                    <div class="movie-tags">
+                        <span class="movie-tag"><i class="fas fa-closed-captioning"></i> Altyazılı</span>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://images.unsplash.com/photo-1594909122849-11daa2a0cf2b?w=400&q=80" alt="Film 6">
+                    <span class="movie-quality">HD</span>
+                </div>
+                <div class="movie-info">
+                    <div class="movie-meta">
+                        <span class="movie-year">2024</span>
+                        <span class="movie-rating"><i class="fas fa-star"></i> 8.3</span>
+                    </div>
+                    <h3 class="movie-title">Film 6</h3>
+                    <div class="movie-tags">
+                        <span class="movie-tag"><i class="fas fa-flag"></i> TR</span>
+                        <span class="movie-tag"><i class="fas fa-closed-captioning"></i> Dublaj</span>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://images.unsplash.com/photo-1517604931442-71053e3e2f3e?w=400&q=80" alt="Film 7">
+                    <span class="movie-quality">HD</span>
+                </div>
+                <div class="movie-info">
+                    <div class="movie-meta">
+                        <span class="movie-year">2026</span>
+                        <span class="movie-rating"><i class="fas fa-star"></i> 7.2</span>
+                    </div>
+                    <h3 class="movie-title">Film 7</h3>
+                    <div class="movie-tags">
+                        <span class="movie-tag"><i class="fas fa-closed-captioning"></i> Altyazılı</span>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://images.unsplash.com/photo-1533488765986-dfa2a9939acd?w=400&q=80" alt="Film 8">
+                    <span class="movie-quality">HD</span>
+                </div>
+                <div class="movie-info">
+                    <div class="movie-meta">
+                        <span class="movie-year">2025</span>
+                        <span class="movie-rating"><i class="fas fa-star"></i> 8.5</span>
+                    </div>
+                    <h3 class="movie-title">Film 8</h3>
+                    <div class="movie-tags">
+                        <span class="movie-tag"><i class="fas fa-closed-captioning"></i> Altyazılı</span>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=400&q=80" alt="Film 9">
+                    <span class="movie-quality">HD</span>
+                </div>
+                <div class="movie-info">
+                    <div class="movie-meta">
+                        <span class="movie-year">2024</span>
+                        <span class="movie-rating"><i class="fas fa-star"></i> 7.6</span>
+                    </div>
+                    <h3 class="movie-title">Film 9</h3>
+                    <div class="movie-tags">
+                        <span class="movie-tag"><i class="fas fa-flag"></i> TR</span>
+                        <span class="movie-tag"><i class="fas fa-closed-captioning"></i> Dublaj</span>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=400&q=80" alt="Film 10">
+                    <span class="movie-quality">HD</span>
+                </div>
+                <div class="movie-info">
+                    <div class="movie-meta">
+                        <span class="movie-year">2026</span>
+                        <span class="movie-rating"><i class="fas fa-star"></i> 8.7</span>
+                    </div>
+                    <h3 class="movie-title">Film 10</h3>
+                    <div class="movie-tags">
+                        <span class="movie-tag"><i class="fas fa-closed-captioning"></i> Altyazılı</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reklam Alanı - Footer -->
+    <div class="ad-section">
+        <div class="ad-banner" style="height: 100px;">
+            <span class="ad-label">🔴 REKLAM ALANI - FOOTER BANNER</span>
+            <span class="ad-size">970x250 / 728x90 / 300x250</span>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Anasayfa</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-film"></i>
+            <span>Filmler</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-compass"></i>
+            <span>Keşfet</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-tv"></i>
+            <span>Diziler</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-bars"></i>
+            <span>Menü</span>
+        </a>
+    </nav>
+
+    <!-- Arama Overlay -->
+    <div class="search-overlay" id="searchOverlay" onclick="closeSearchOutside(event)">
+        <div class="search-panel" onclick="event.stopPropagation()">
+            <div class="search-header">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Film veya Dizi Ara (IMDb ID, Orijinal ve Türkçe isim)" id="searchInput">
+                </div>
+                <button class="esc-btn" onclick="toggleSearch()">ESC</button>
+            </div>
+            <div class="popular-searches">
+                <div class="popular-title">
+                    <i class="fas fa-bolt"></i>
+                    Popüler Aramalar
+                </div>
+                <div class="search-movie-item" onclick="location.href='sherlock.html'">
+                    <div class="search-movie-thumb">
+                        <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=200&q=80" alt="Sherlock">
+                    </div>
+                    <div class="search-movie-info">
+                        <div class="search-movie-meta">
+                            <span class="search-movie-year">2010</span>
+                            <span class="search-movie-rating"><i class="fas fa-star"></i> 9.1</span>
+                            <span class="search-movie-type">Dizi</span>
+                        </div>
+                        <div class="search-movie-title">Sherlock</div>
+                    </div>
+                </div>
+                <div class="search-movie-item">
+                    <div class="search-movie-thumb">
+                        <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=200&q=80" alt="Film 2">
+                    </div>
+                    <div class="search-movie-info">
+                        <div class="search-movie-meta">
+                            <span class="search-movie-year">2026</span>
+                            <span class="search-movie-rating"><i class="fas fa-star"></i> 5.2</span>
+                            <span class="search-movie-type">Film</span>
+                        </div>
+                        <div class="search-movie-title">Film 2</div>
+                    </div>
+                </div>
+                <div class="search-movie-item">
+                    <div class="search-movie-thumb">
+                        <img src="https://images.unsplash.com/photo-1533488765986-dfa2a9939acd?w=200&q=80" alt="Film 3">
+                    </div>
+                    <div class="search-movie-info">
+                        <div class="search-movie-meta">
+                            <span class="search-movie-year">2025</span>
+                            <span class="search-movie-rating"><i class="fas fa-star"></i> 7.3</span>
+                            <span class="search-movie-type">Film</span>
+                        </div>
+                        <div class="search-movie-title">Film 3</div>
+                    </div>
+                </div>
+                <div class="search-movie-item">
+                    <div class="search-movie-thumb">
+                        <img src="https://images.unsplash.com/photo-1517604931442-71053e3e2f3e?w=200&q=80" alt="Film 4">
+                    </div>
+                    <div class="search-movie-info">
+                        <div class="search-movie-meta">
+                            <span class="search-movie-year">2026</span>
+                            <span class="search-movie-rating"><i class="fas fa-star"></i> 8.4</span>
+                            <span class="search-movie-type">Film</span>
+                        </div>
+                        <div class="search-movie-title">Film 4</div>
+                    </div>
+                </div>
+                <div class="search-movie-item">
+                    <div class="search-movie-thumb">
+                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=200&q=80" alt="Film 5">
+                    </div>
+                    <div class="search-movie-info">
+                        <div class="search-movie-meta">
+                            <span class="search-movie-year">2025</span>
+                            <span class="search-movie-rating"><i class="fas fa-star"></i> 7.1</span>
+                            <span class="search-movie-type">Film</span>
+                        </div>
+                        <div class="search-movie-title">Film 5</div>
+                    </div>
+                </div>
+                <div class="search-movie-item">
+                    <div class="search-movie-thumb">
+                        <img src="https://images.unsplash.com/photo-1594909122849-11daa2a0cf2b?w=200&q=80" alt="Film 6">
+                    </div>
+                    <div class="search-movie-info">
+                        <div class="search-movie-meta">
+                            <span class="search-movie-year">2024</span>
+                            <span class="search-movie-rating"><i class="fas fa-star"></i> 8.9</span>
+                            <span class="search-movie-type">Film</span>
+                        </div>
+                        <div class="search-movie-title">Film 6</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const container = document.getElementById('sliderContainer');
+        
+        function updateSlider() {
+            container.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSlider();
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateSlider();
+        }
+        
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+        }
+        
+        setInterval(nextSlide, 5000);
+        
+        // Tabs
+        function switchTab(btn, category) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+        }
+        
+        // Tema Değiştirme
+        let isDark = true;
+        function toggleTheme() {
+            isDark = !isDark;
+            const body = document.body;
+            const themeBtn = document.getElementById('themeBtn');
+            
+            if (isDark) {
+                body.removeAttribute('data-theme');
+                themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                body.setAttribute('data-theme', 'light');
+                themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        }
+        
+        // Arama Overlay
+        function toggleSearch() {
+            const overlay = document.getElementById('searchOverlay');
+            overlay.classList.toggle('active');
+            if (overlay.classList.contains('active')) {
+                setTimeout(() => document.getElementById('searchInput').focus(), 300);
+            }
+        }
+        
+        function closeSearchOutside(event) {
+            if (event.target === document.getElementById('searchOverlay')) {
+                toggleSearch();
+            }
+        }
+        
+        // ESC tuşu ile kapatma
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const overlay = document.getElementById('searchOverlay');
+                if (overlay.classList.contains('active')) {
+                    toggleSearch();
+                }
+            }
+        });
+        
+        // Bottom nav
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Touch swipe
+        let touchStartX = 0;
+        container.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        container.addEventListener('touchend', e => {
+            const diff = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 50) {
+                diff > 0 ? nextSlide() : prevSlide();
+            }
+        });
+    </script>
+</body>
+</html>
